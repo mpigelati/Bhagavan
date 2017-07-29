@@ -12,25 +12,23 @@ os.system("git status > status.txt")
 #print(subprocess(["cat",""]))
 def Fun_print_file(Fd):
     Zip=[]
-    #print ("please print file content")
     P_list = Fd.readlines()
     count=0
     for line in P_list:
-        count= count+len(line)
-        #print("Count",count)
-        #print (line)
         if(line !='\n'):
+            print(line)
             if "modified:" in line :
-                #print("line ",line)
                 temp = "".join(line.strip( ).split(':')[1])
-                #print("temp",temp)
                 Zip.append(temp)
-                #print("Zip",Zip)
-            elif "Untracked files:"in line:
-                print("count",count)
-                print("you are in else statement")
-                #S_lines = Fd.readlines(200)
-                #print(S_lines)
+                
+
+
+
+
+
+
+    print("Zip",Zip)
+
 
 def Fun_open_File(Filename,mode):
     try:
