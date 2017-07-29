@@ -7,28 +7,29 @@ import os
 #list_comm = ("git","status",">","samp.txt")
 #subprocess.call(list_comm)
 
-os.system("git status > status.txt")
+#os.system("git status > status.txt")
 
 #print(subprocess(["cat",""]))
 def Fun_print_file(Fd):
     Zip=[]
     P_list = Fd.readlines()
-    count=0
-    for line in P_list:
+    count=len(P_list)
+    for i, line in enumerate(P_list):
+	line = line.rstrip()
+	#print i,  line
         if(line !='\n'):
-            print(line)
+            #print(line)
             if "modified:" in line :
                 temp = "".join(line.strip( ).split(':')[1])
                 Zip.append(temp)
-                
-
-
-
-
-
-
-    print("Zip",Zip)
-
+            elif "Untracked" in line:
+		print "got untracked files"
+		for j in range(i+3, count):
+			#if (len(P_list[j]) > 0):
+			if (P_list[j].isspace() == False):
+				print "===", P_list[j]
+			else:
+				break
 
 def Fun_open_File(Filename,mode):
     try:
