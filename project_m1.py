@@ -1,11 +1,13 @@
 import subprocess
 import os
+
 subprocess.call('git status > git_info.txt',shell=True)
 
-def Fun_Remove_1(temp):
+def Fun_To_Remove_Syntax(temp):
 	temp1 = temp.lstrip(" ").lstrip("\t").rstrip("\n")
 	return temp1
-def Fun_print_file(Fd):
+
+def Fun_To_List_files(Fd):
     Zip=[]
     P_list = Fd.readlines()
     count=len(P_list)
@@ -14,7 +16,7 @@ def Fun_print_file(Fd):
         if(line !='\n'):
             if "modified:" in line :
                 temp = "".join(line.strip( ).split(':')[1])
-                temp = Fun_Remove_1(temp)
+                temp = Fun_To_Remove_Syntax(temp)
 		Zip.append(temp)
             elif "Untracked" in line:
 		for j in range(i+3, count):
@@ -25,7 +27,7 @@ def Fun_print_file(Fd):
 				break
 				
 
-def Fun_open_File(Filename,mode):
+def Fun_To_open_File(Filename,mode):
     try:
         fd= open(Filename,mode)
     except:
@@ -34,9 +36,13 @@ def Fun_open_File(Filename,mode):
     else:
         return fd
 
+
 zip=[]
-Fd = Fun_open_File("git_info.txt","r")
-zip = Fun_print_file(Fd)
+
+Fd = Fun_To_open_File("git_info.txt","r")
+
+zip = Fun_To_List_files(Fd)
+
 string= "tar -rvf patch.tar " +" ".join(zip)
 
 subprocess.call(string,shell=True)
