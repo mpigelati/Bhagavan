@@ -1,15 +1,19 @@
 #print ("hellow world")
 import subprocess
 import os
-#subprocess.call()
-#subprocess.call(("ls","-la"))
-#list_comm_1 = ("ls","-la")
-#list_comm = ("git","status",">","samp.txt")
-#subprocess.call(list_comm)
+#subprocess.call('git status > git_info.txt',shell=True)
 
-#os.system("git status > status.txt")
+	
+#os.system("git status > git_info.txt")
 
 #print(subprocess(["cat",""]))
+def Fun_Remove(My_list):
+	length=len(My_list)
+	
+	for i in (1, length):
+		My_list[i-1]=My_list[i-1].lstrip(" ").lstrip("\t").rstrip("\n")
+	return My_list
+
 def Fun_print_file(Fd):
     Zip=[]
     P_list = Fd.readlines()
@@ -23,13 +27,16 @@ def Fun_print_file(Fd):
                 temp = "".join(line.strip( ).split(':')[1])
                 Zip.append(temp)
             elif "Untracked" in line:
-		print "got untracked files"
+		#print "got untracked files"
 		for j in range(i+3, count):
 			#if (len(P_list[j]) > 0):
 			if (P_list[j].isspace() == False):
-				print "===", P_list[j]
+				#print "===", P_list[j]
+				Zip.append(P_list[j])	
 			else:
+				return Zip
 				break
+				
 
 def Fun_open_File(Filename,mode):
     try:
@@ -41,6 +48,13 @@ def Fun_open_File(Filename,mode):
         #print("file opened success fully")
         return fd
 
-Fd = Fun_open_File("status.txt","r")
+zip=[]
+Fd = Fun_open_File("git_info.txt","r")
+#print(fd)
+zip = Fun_print_file(Fd)
+zip=Fun_Remove(zip)
+#print ("Zip",zip)
+string= " ".join(zip)
+print ("string",string)
 
-Fun_print_file(Fd)
+#subprocess.call(string,std)
