@@ -54,7 +54,8 @@ Fd = Fun_open_File("git_info.txt","r")
 zip = Fun_print_file(Fd)
 zip=Fun_Remove(zip)
 #print ("Zip",zip)
-string= " ".join(zip)
+string= "tar -rvf patch.tar " +" ".join(zip)
 print ("string",string)
 
-#subprocess.call(string,std)
+subprocess.call(string,shell=True)
+
